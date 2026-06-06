@@ -1,0 +1,517 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>PlayBeat — Digital Games, Gift Cards & Software</title>
+  <meta name="description" content="Pakistan's #1 digital store for PC games, gift cards, software keys, AI tools and game top-ups. Instant delivery guaranteed.">
+  <link rel="stylesheet" href="shared.css">
+  <style>
+    /* ── PROMO BANNER ── */
+    .promo-banner {
+      background: linear-gradient(135deg, var(--surface) 0%, var(--surface2) 100%);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-lg);
+      padding: 28px 32px;
+      display: grid;
+      grid-template-columns: 1fr 1fr 1fr;
+      gap: 0;
+      margin-bottom: 52px;
+      overflow: hidden;
+      position: relative;
+    }
+    .promo-banner::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: radial-gradient(ellipse 60% 80% at 0% 50%, rgba(245,166,35,.06) 0%, transparent 70%);
+      pointer-events: none;
+    }
+    .promo-item {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      padding: 0 24px;
+      position: relative;
+    }
+    .promo-item + .promo-item::before {
+      content: '';
+      position: absolute;
+      left: 0; top: 10%; bottom: 10%;
+      width: 1px;
+      background: var(--border);
+    }
+    .promo-icon {
+      font-size: 28px;
+      flex-shrink: 0;
+    }
+    .promo-title {
+      font-family: var(--display);
+      font-size: 14px;
+      font-weight: 700;
+    }
+    .promo-desc {
+      font-size: 12.5px;
+      color: var(--muted);
+      margin-top: 2px;
+    }
+
+    /* ── CATEGORY CARDS ── */
+    .cat-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+      gap: 14px;
+    }
+    .cat-card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-lg);
+      padding: 24px 20px;
+      text-decoration: none;
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+      gap: 10px;
+      transition: all .2s;
+      position: relative;
+      overflow: hidden;
+    }
+    .cat-card::after {
+      content: '';
+      position: absolute;
+      bottom: -30px; right: -30px;
+      width: 80px; height: 80px;
+      border-radius: 50%;
+      background: var(--glow-lg);
+      transition: transform .3s;
+    }
+    .cat-card:hover::after { transform: scale(2.5); }
+    .cat-card:hover {
+      border-color: var(--accent);
+      box-shadow: 0 6px 24px var(--glow);
+      transform: translateY(-3px);
+    }
+    .cat-icon { font-size: 26px; }
+    .cat-label {
+      font-family: var(--display);
+      font-size: 14px;
+      font-weight: 700;
+      color: var(--text);
+    }
+    .cat-count {
+      font-size: 12px;
+      color: var(--muted);
+    }
+
+    /* ── DEAL BANNER ── */
+    .deal-banner {
+      background: linear-gradient(135deg, #0d2340 0%, #162f4a 100%);
+      border: 1px solid rgba(245,166,35,.25);
+      border-radius: var(--radius-lg);
+      padding: 36px 40px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 24px;
+      margin: 52px 0;
+      position: relative;
+      overflow: hidden;
+    }
+    .deal-banner::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background:
+        radial-gradient(ellipse 50% 80% at 100% 50%, rgba(245,166,35,.12) 0%, transparent 60%),
+        linear-gradient(90deg, transparent 40%, rgba(245,166,35,.04) 100%);
+      pointer-events: none;
+    }
+    .deal-tag {
+      display: inline-block;
+      background: var(--accent);
+      color: var(--bg);
+      font-family: var(--display);
+      font-size: 11px;
+      font-weight: 800;
+      letter-spacing: 2px;
+      padding: 4px 12px;
+      border-radius: 6px;
+      margin-bottom: 12px;
+      text-transform: uppercase;
+    }
+    .deal-title {
+      font-family: var(--display);
+      font-size: clamp(22px, 3vw, 34px);
+      font-weight: 800;
+      letter-spacing: -1px;
+      line-height: 1.1;
+    }
+    .deal-title span { color: var(--accent); }
+    .deal-sub {
+      color: var(--muted);
+      font-size: 14px;
+      margin-top: 8px;
+    }
+    .deal-cta {
+      flex-shrink: 0;
+      background: linear-gradient(135deg, var(--accent), var(--accent2));
+      border: none;
+      border-radius: var(--radius);
+      color: var(--bg);
+      font-family: var(--display);
+      font-size: 15px;
+      font-weight: 800;
+      padding: 14px 32px;
+      cursor: pointer;
+      text-decoration: none;
+      display: inline-block;
+      transition: box-shadow .2s, transform .2s;
+      white-space: nowrap;
+    }
+    .deal-cta:hover { box-shadow: 0 8px 32px var(--glow); transform: translateY(-2px); }
+
+    @media (max-width: 640px) {
+      .promo-banner { grid-template-columns: 1fr; gap: 16px; }
+      .promo-item + .promo-item::before { display: none; }
+      .promo-item { padding: 0; }
+      .deal-banner { flex-direction: column; align-items: flex-start; padding: 28px 24px; }
+      .cat-grid { grid-template-columns: repeat(auto-fill, minmax(140px, 1fr)); }
+    }
+  </style>
+</head>
+<body>
+
+<!-- TICKER -->
+<div class="ticker-wrap">
+  <div class="ticker-track" id="ticker"></div>
+</div>
+
+<!-- TOPBAR -->
+<header class="topbar">
+  <div class="topbar-inner">
+    <a href="index.html" class="logo">
+      <span class="logo-text">Play<span>Beat</span></span>
+      <span class="logo-sub">Digital Store</span>
+    </a>
+    <div class="search-wrap">
+      <input type="text" id="topbar-search" placeholder="Search games, gift cards…" autocomplete="off">
+      <span class="search-icon">⌕</span>
+      <div class="search-results" id="topbar-results"></div>
+    </div>
+    <nav class="top-nav">
+      <a href="index.html" class="active">Home</a>
+      <a href="shop.html">Shop</a>
+      <a href="shop.html?cat=games">Games</a>
+      <a href="shop.html?cat=gift-cards">Gift Cards</a>
+      <a href="shop.html?cat=ai-tools">AI Tools</a>
+      <a href="deals.html" class="pill">🔥 Deals</a>
+    </nav>
+    <button class="cart-btn" id="cart-btn" title="Cart">
+      🛒
+      <span class="cart-count" id="cart-count">0</span>
+    </button>
+    <button class="hamburger" id="hamburger">☰</button>
+  </div>
+</header>
+
+<!-- CATEGORY NAV -->
+<nav class="cat-nav">
+  <div class="cat-nav-inner">
+    <a href="shop.html" class="cat-pill active">All</a>
+    <a href="shop.html?cat=games" class="cat-pill">🎮 Games</a>
+    <a href="shop.html?cat=gift-cards" class="cat-pill">🎁 Gift Cards</a>
+    <a href="shop.html?cat=software" class="cat-pill">💻 Software</a>
+    <a href="shop.html?cat=ai-tools" class="cat-pill">🤖 AI Tools</a>
+    <a href="shop.html?cat=game-items" class="cat-pill">⚔️ Game Items</a>
+    <a href="shop.html?cat=accounts" class="cat-pill">📺 Accounts</a>
+    <a href="shop.html?cat=subscriptions" class="cat-pill">🔁 Subscriptions</a>
+    <a href="shop.html?cat=top-up" class="cat-pill">💎 Top-Up</a>
+  </div>
+</nav>
+
+<!-- MOBILE NAV -->
+<div class="mobile-nav" id="mobile-nav">
+  <button class="mobile-nav-close">✕</button>
+  <a href="index.html">🏠 Home</a>
+  <a href="shop.html">🛍️ Shop All</a>
+  <a href="shop.html?cat=games">🎮 Games</a>
+  <a href="shop.html?cat=gift-cards">🎁 Gift Cards</a>
+  <a href="shop.html?cat=software">💻 Software</a>
+  <a href="shop.html?cat=ai-tools">🤖 AI Tools</a>
+  <a href="shop.html?cat=game-items">⚔️ Game Items</a>
+  <a href="shop.html?cat=accounts">📺 Accounts</a>
+  <a href="shop.html?cat=subscriptions">🔁 Subscriptions</a>
+  <a href="shop.html?cat=top-up">💎 Top-Up</a>
+  <a href="deals.html">🔥 Deals</a>
+</div>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-bg"></div>
+  <div class="hero-content">
+    <div class="hero-eyebrow">
+      <span class="dot"></span>
+      Instant Digital Delivery
+    </div>
+    <h1 class="hero-title">Pakistan's #1<br><span>Digital Game Store</span></h1>
+    <p class="hero-sub">Games, gift cards, software keys, AI tools — all at unbeatable prices. Delivered to your inbox in seconds.</p>
+    <div class="hero-stats">
+      <div>
+        <div class="hero-stat-val">10K+</div>
+        <div class="hero-stat-lbl">Happy Customers</div>
+      </div>
+      <div>
+        <div class="hero-stat-val">200+</div>
+        <div class="hero-stat-lbl">Products</div>
+      </div>
+      <div>
+        <div class="hero-stat-val">4.9★</div>
+        <div class="hero-stat-lbl">Avg Rating</div>
+      </div>
+      <div>
+        <div class="hero-stat-val">24/7</div>
+        <div class="hero-stat-lbl">Support</div>
+      </div>
+    </div>
+    <div class="hero-search">
+      <input type="text" id="hero-search-input" placeholder="Search GTA V, Steam Wallet, Adobe…" autocomplete="off">
+      <div class="search-results" id="hero-search-results" style="top:calc(100% + 8px);position:absolute;left:0;right:60px;"></div>
+      <button onclick="window.location.href='shop.html'">Browse All</button>
+    </div>
+  </div>
+</section>
+
+<!-- PROMO BANNER -->
+<div class="container">
+  <div class="promo-banner" style="margin-top:40px;">
+    <div class="promo-item">
+      <div class="promo-icon">⚡</div>
+      <div>
+        <div class="promo-title">Instant Delivery</div>
+        <div class="promo-desc">Keys sent to email within seconds</div>
+      </div>
+    </div>
+    <div class="promo-item">
+      <div class="promo-icon">🔒</div>
+      <div>
+        <div class="promo-title">100% Genuine Keys</div>
+        <div class="promo-desc">Verified authentic product codes</div>
+      </div>
+    </div>
+    <div class="promo-item">
+      <div class="promo-icon">💰</div>
+      <div>
+        <div class="promo-title">Best Prices in PK</div>
+        <div class="promo-desc">Pay in PKR — no hidden fees</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- SHOP BY CATEGORY -->
+<section class="section">
+  <div class="container">
+    <div class="section-head">
+      <h2 class="section-title">Shop by <span>Category</span></h2>
+      <a href="shop.html" class="section-link">View all →</a>
+    </div>
+    <div class="cat-grid">
+      <a href="shop.html?cat=games" class="cat-card">
+        <div class="cat-icon">🎮</div>
+        <div class="cat-label">Games</div>
+        <div class="cat-count">6 products</div>
+      </a>
+      <a href="shop.html?cat=gift-cards" class="cat-card">
+        <div class="cat-icon">🎁</div>
+        <div class="cat-label">Gift Cards</div>
+        <div class="cat-count">6 products</div>
+      </a>
+      <a href="shop.html?cat=software" class="cat-card">
+        <div class="cat-icon">💻</div>
+        <div class="cat-label">Software</div>
+        <div class="cat-count">4 products</div>
+      </a>
+      <a href="shop.html?cat=ai-tools" class="cat-card">
+        <div class="cat-icon">🤖</div>
+        <div class="cat-label">AI Tools</div>
+        <div class="cat-count">4 products</div>
+      </a>
+      <a href="shop.html?cat=game-items" class="cat-card">
+        <div class="cat-icon">⚔️</div>
+        <div class="cat-label">Game Items</div>
+        <div class="cat-count">4 products</div>
+      </a>
+      <a href="shop.html?cat=accounts" class="cat-card">
+        <div class="cat-icon">📺</div>
+        <div class="cat-label">Accounts</div>
+        <div class="cat-count">4 products</div>
+      </a>
+      <a href="shop.html?cat=subscriptions" class="cat-card">
+        <div class="cat-icon">🔁</div>
+        <div class="cat-label">Subscriptions</div>
+        <div class="cat-count">4 products</div>
+      </a>
+      <a href="shop.html?cat=top-up" class="cat-card">
+        <div class="cat-icon">💎</div>
+        <div class="cat-label">Top-Up</div>
+        <div class="cat-count">4 products</div>
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- TRENDING -->
+<section class="section" style="padding-top:0;">
+  <div class="container">
+    <div class="section-head">
+      <h2 class="section-title">🔥 <span>Trending</span> Now</h2>
+      <a href="deals.html" class="section-link">See all deals →</a>
+    </div>
+    <div class="product-grid" id="trending-grid"></div>
+  </div>
+</section>
+
+<!-- DEAL BANNER -->
+<div class="container">
+  <div class="deal-banner">
+    <div>
+      <div class="deal-tag">Limited Time</div>
+      <div class="deal-title">Adobe CC &amp;<br><span>Office 2024</span> Bundles</div>
+      <div class="deal-sub">Get the full creative suite at Pakistan's lowest prices — genuine keys, instant delivery.</div>
+    </div>
+    <a href="shop.html?cat=software" class="deal-cta">Shop Software →</a>
+  </div>
+</div>
+
+<!-- GAMES -->
+<section class="section">
+  <div class="container">
+    <div class="section-head">
+      <h2 class="section-title">🎮 Popular <span>Games</span></h2>
+      <a href="shop.html?cat=games" class="section-link">View all →</a>
+    </div>
+    <div class="product-grid" id="games-grid"></div>
+  </div>
+</section>
+
+<!-- GIFT CARDS -->
+<section class="section" style="padding-top:0;">
+  <div class="container">
+    <div class="section-head">
+      <h2 class="section-title">🎁 <span>Gift Cards</span></h2>
+      <a href="shop.html?cat=gift-cards" class="section-link">View all →</a>
+    </div>
+    <div class="product-grid" id="giftcards-grid"></div>
+  </div>
+</section>
+
+<!-- ON SALE -->
+<section class="section" style="padding-top:0;">
+  <div class="container">
+    <div class="section-head">
+      <h2 class="section-title">💸 <span>On Sale</span></h2>
+      <a href="deals.html" class="section-link">View all deals →</a>
+    </div>
+    <div class="product-grid" id="sale-grid"></div>
+  </div>
+</section>
+
+<!-- CART DRAWER -->
+<div class="cart-overlay" id="cart-overlay"></div>
+<aside class="cart-drawer" id="cart-drawer">
+  <div class="cart-head">
+    <h2>Your Cart</h2>
+    <button class="cart-close" id="cart-close">✕</button>
+  </div>
+  <div class="cart-items" id="cart-items"></div>
+  <div class="cart-foot">
+    <div class="cart-total">
+      <span class="ct-label">Total</span>
+      <span class="ct-val" id="cart-total-val">Rs 0</span>
+    </div>
+    <button class="cart-checkout" id="cart-checkout-btn">Proceed to Checkout</button>
+    <button class="cart-clear" id="cart-clear-btn">Clear Cart</button>
+  </div>
+</aside>
+
+<!-- TOAST -->
+<div id="toast"></div>
+
+<!-- FOOTER -->
+<footer class="footer">
+  <div class="footer-trust">
+    <div class="trust-badge">Instant Delivery</div>
+    <div class="trust-badge">100% Genuine Keys</div>
+    <div class="trust-badge">PKR Pricing</div>
+    <div class="trust-badge">24/7 Support</div>
+    <div class="trust-badge">10,000+ Orders</div>
+  </div>
+  <div class="footer-top">
+    <div class="footer-brand">
+      <div class="footer-logo-text">Play<span>Beat</span></div>
+      <p class="footer-tagline">Pakistan's most trusted digital game store. Genuine keys, instant delivery, unbeatable prices in PKR.</p>
+      <div class="footer-socials">
+        <a href="#" class="social-btn">WhatsApp</a>
+        <a href="#" class="social-btn">Facebook</a>
+        <a href="#" class="social-btn">Instagram</a>
+        <a href="#" class="social-btn">Telegram</a>
+      </div>
+    </div>
+    <div class="footer-col">
+      <h4>Categories</h4>
+      <ul>
+        <li><a href="shop.html?cat=games">Games</a></li>
+        <li><a href="shop.html?cat=gift-cards">Gift Cards</a></li>
+        <li><a href="shop.html?cat=software">Software</a></li>
+        <li><a href="shop.html?cat=ai-tools">AI Tools</a></li>
+        <li><a href="shop.html?cat=top-up">Top-Up</a></li>
+      </ul>
+    </div>
+    <div class="footer-col">
+      <h4>Help</h4>
+      <ul>
+        <li><a href="#">How to Order</a></li>
+        <li><a href="#">Delivery Info</a></li>
+        <li><a href="#">Refund Policy</a></li>
+        <li><a href="#">FAQ</a></li>
+        <li><a href="#">Contact Us</a></li>
+      </ul>
+    </div>
+    <div class="footer-col">
+      <h4>Support</h4>
+      <div class="footer-support">
+        <a href="https://wa.me/923001234567" class="support-link">📱 WhatsApp Us</a>
+        <a href="mailto:support@playbeat.pk" class="support-link">✉️ Email Support</a>
+        <a href="#" class="support-link">💬 Live Chat</a>
+        <a href="#" class="support-link">📦 Track Order</a>
+      </div>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <span>© 2025 <strong>PlayBeat</strong> — All rights reserved.</span>
+    <div class="footer-bottom-links">
+      <a href="#">Privacy Policy</a>
+      <a href="#">Terms of Service</a>
+      <a href="#">Refund Policy</a>
+    </div>
+  </div>
+</footer>
+
+<script src="products.js"></script>
+<script src="shared.js"></script>
+<script>
+  /* Build ticker */
+  const tickerItems = window.PB_PRODUCTS.filter(p => p.badge).slice(0, 12);
+  const tickerHTML = tickerItems.map(p =>
+    `<span class="ticker-item">${p.badge} ${p.name} — ${window.PB.fmt(p.sale || p.price)}</span><span class="ticker-dot"></span>`
+  ).join('');
+  document.getElementById('ticker').innerHTML = tickerHTML + tickerHTML; // duplicate for infinite loop
+
+  /* Render grids */
+  document.getElementById('trending-grid').innerHTML = window.PB.trending().slice(0,6).map(window.PB.card).join('');
+  document.getElementById('games-grid').innerHTML = window.PB.byCat('games').map(window.PB.card).join('');
+  document.getElementById('giftcards-grid').innerHTML = window.PB.byCat('gift-cards').map(window.PB.card).join('');
+  document.getElementById('sale-grid').innerHTML = window.PB.sale().slice(0,6).map(window.PB.card).join('');
+</script>
+</body>
+</html>
