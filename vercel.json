@@ -70,8 +70,16 @@
     "playbeat-backend": {
       "type": "web",
       "routePrefix": "/",
+<<<<<<< HEAD
       "buildCommand": "npm install",
       "entrypoint": "server.js"
     }
   }
 }
+=======
+      "buildCommand": "npm install"
+      "entrypoint": "server.js"
+    }
+  }
+}
+>>>>>>> fb0772b (chore: handle missing MongoDB URI; export Product model; add frontend Vercel config and deploy docs; add .env.example and .gitignore)

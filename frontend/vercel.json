@@ -1,0 +1,27 @@
+{
+    "version": 2,
+    "cleanUrls": true,
+    "trailingSlash": false,
+    "routes": [
+        {
+            "src": "^/$",
+            "dest": "/index.html"
+        },
+        {
+            "src": "^/shop$",
+            "dest": "/shop.html"
+        },
+        {
+            "src": "^/deals$",
+            "dest": "/deals.html"
+        },
+        {
+            "src": "^/products.js$",
+            "dest": "/products.js"
+        },
+        {
+            "src": "^/shared(\\.js|\\.css)$",
+            "dest": "/shared$1"
+        }
+    ]
+}
